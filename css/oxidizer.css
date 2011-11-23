@@ -7,3 +7,8 @@ table.chat td.person img{
 table.chat td.body{
   vertical-align:bottom;
 }
+#chat-wrapper.hide-kick .kick_message, 
+#chat-wrapper.hide-enter .enter_message, 
+#chat-wrapper.hide-timestamp .timestamp_message{
+  display:none;
+}

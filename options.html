@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Oxidizer Options</title>
+    <style type="text/css">
+      body{
+        font-family: Helvetica, Arial, sans-serif;
+        font-size:13px;
+        width:60%;
+        margin: 0 auto;
+      }
+      header{
+        border-bottom: 1px solid #DDDDDD;
+        margin-bottom: 20px;
+      }
+      h1{
+        font-size:28px;
+        margin-bottom:0;
+      }
+      .tagline{
+        color: green;
+        font-size:14px;
+        margin-bottom: 20px;
+      }
+      .fields{
+        margin-bottom: 20px;
+      }
+      .fields h2{
+        margin-bottom:10px;
+      }
+      .fields input[type=checkbox]{
+        margin:2px 0;
+        padding:0;
+        vertical-align:bottom;
+      }
+      #status{
+        color:green;
+      }
+    </style>
+    <script type="text/javascript">
+
+      var storagePrefix = "oxidizer-"
+
+      function read(key){
+        return localStorage[storagePrefix + key];
+      }
+      function write(key, value){
+        return localStorage[storagePrefix + key] = value;
+      }
+      function remove(key){
+        return localStorage.removeItem(storagePrefix + key);
+      }
+
+      // Saves options to localStorage.
+      function save_options() {
+        var checkboxes = document.querySelectorAll(".fields input[type=checkbox]");
+
+        for(var i = checkboxes.length - 1; i >= 0; --i){
+          var checkbox = checkboxes[i];
+          var name = checkbox.name;
+          if(checkbox.checked){
+            write(name, 1);
+          }else{
+            remove(name);
+          }
+        }
+
+        // Update status to let user know options were saved.
+        var status = document.getElementById("status");
+        status.innerHTML = "Options Saved.";
+        setTimeout(function() {
+          status.innerHTML = "";
+        }, 900);
+      }
+
+      // Restores select box state to saved value from localStorage.
+      function restore_options() {
+        var checkboxes = document.querySelectorAll(".fields input[type=checkbox]");
+
+        for(var i = checkboxes.length - 1; i >= 0; --i){
+          var checkbox = checkboxes[i];
+          var name = checkbox.name;
+          var checked = read(name);
+          if(checked){
+            checkbox.checked = true;
+          }
+        }
+      }
+
+    </script>
+  </head>
+  <body onload="restore_options()">
+    <header>
+      <h1>Oxidizer</h1>
+      <div class="tagline">Spice up your campfire room</div>
+    </header>
+
+    <section class="fields">
+      <h2>Avatars</h2>
+      <input type="checkbox" value="1" name="show-avatars" />
+      <label for="show-avatars">Show Avatars</label>
+    </section>
+
+    <section class="fields">
+      <h2>Messages</h2>
+      <input type="checkbox" value="1" name="hide-enter" />
+      <label for="hide-enter">Hide Enter</label>
+      <br>
+      <input type="checkbox" value="1" name="hide-kick" />
+      <label for="hide-enter">Hide Leave</label>
+      <br>
+      <input type="checkbox" value="1" name="hide-timestamps" />
+      <label for="hide-enter">Hide Timestamps</label>
+    </section>
+    
+    <button onclick="save_options()">Save</button>
+    <span id="status"></span>
+  </body>
+</html>

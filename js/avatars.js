@@ -1,4 +1,4 @@
-var campvatar = {
+var Avatars = {
 
   /**
    * an object containing identities of already visited messages 
@@ -40,12 +40,12 @@ var campvatar = {
 
       //check if the message has been already processed
       var messageId = person.parent().attr("id");
-      if(campvatar.visited[messageId]){
+      if(Avatars.visited[messageId]){
         break;
       }
-      campvatar.visited[messageId] = true;
+      Avatars.visited[messageId] = true;
 
-      var avatar = campvatar._getAvatar(person);
+      var avatar = Avatars._getAvatar(person);
       if(!avatar){
         continue;
       }
@@ -56,7 +56,7 @@ var campvatar = {
     }
 
     if(modified){
-      campvatar._scrollChatToBottom();
+      Avatars._scrollChatToBottom();
     }
 
   },
@@ -66,7 +66,7 @@ var campvatar = {
    * @private
    */
   "_scrollChatToBottom": function(){
-    var targetY = campvatar._getPageHeight() + campvatar._getWindowHeight() + 100;
+    var targetY = Avatars._getPageHeight() + Avatars._getWindowHeight() + 100;
     window.scrollTo(0, targetY);
   },
 
@@ -83,6 +83,6 @@ var campvatar = {
 }
 
 //$.fn.ready(function(){
-  campvatar.addAvatars();
-  setInterval(campvatar.addAvatars, 1000);
+  Avatars.addAvatars();
+  setInterval(Avatars.addAvatars, 1000);
 //})
