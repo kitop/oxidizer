@@ -1,0 +1,13 @@
+{
+    "name": "Oxidizer",
+    "version": "0.1",
+    "description": "Color up your campfire!",
+    "content_scripts": [{
+        "matches": ["https://*.campfirenow.com/room/*"],
+        "js": ["js/jquery-1.7.0.min.js", "js/oxidizer.js"],
+        "css": ["css/oxidizer.css"]
+    }],
+    "permissions": [
+        "https://*.campfirenow.com/room/*"
+    ]
+}

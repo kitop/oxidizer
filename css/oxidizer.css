@@ -1,0 +1,9 @@
+table.chat td.person{
+  text-align:center
+}
+table.chat td.person img{
+  border-radius:4px;
+}
+table.chat td.body{
+  vertical-align:bottom;
+}
